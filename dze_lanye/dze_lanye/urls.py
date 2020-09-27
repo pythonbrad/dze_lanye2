@@ -8,5 +8,4 @@ urlpatterns = [
     path('accounts/signup/', classroom.SignUpView.as_view(), name='signup'),
     path('accounts/signup/student/', students.StudentSignUpView.as_view(), name='student_signup'),
     path('accounts/signup/teacher/', teachers.TeacherSignUpView.as_view(), name='teacher_signup'),
-    path('conj/', include('conj_nufi.urls')),
 ]
