@@ -13,8 +13,7 @@ def add_datas(apps, schema_editor):
 	Question = apps.get_model('classroom', 'Question')
 	Answer = apps.get_model('classroom', 'Answer')
 
-	owner = User(username='admin')
-	owner.set_password('admin')
+	owner = User(username='generator')
 	owner.save()
 
 	for lang in dict_word:
