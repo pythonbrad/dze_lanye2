@@ -17,7 +17,6 @@ First, clone the repository to your local machine:
 git clone https://github.com/pythonbrad/dze_lanye.git
 cd dze_lanye
 git clone https://github.com/pythonbrad/data_lang.git
-git clone http://github.com/pythonbrad/conj_nufi.git
 ```
 
 Install the requirements:
