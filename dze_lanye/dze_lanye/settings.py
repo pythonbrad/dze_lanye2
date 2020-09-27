@@ -44,7 +44,6 @@ INSTALLED_APPS = [
 
     'classroom',
 
-    'conj_nufi',
 ]
 
 MIDDLEWARE = [
