@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% load markdown_extras %}
+
+{% block content %}
+	<h2 class="mb-3">{{ taken_quiz.quiz.name }} (Correction)</h2>
+	{% if taken_quiz.quiz.can_see_correction %}
+		{% for question in taken_quiz.quiz.questions.all %}
+			<br/>
+			<p class="lead">Question: {{ question.text }}</p>
+			<p>Answers:</p>
+			{% for answer in question.answers.all %}
+				{% if answer.is_correct %}
+					<ol>{{ answer.text }}</ol>
+		  		{% endif %}
+		  	{% endfor %}
+		  	{% if question.explanation|length %}
+		  		<p class="card-title badge badge-info">Explanation</p>
+		  		<div class="card card-body">{{ question.explanation|escape|markdown|safe }}</div>
+		  	{% endif %}
+		{% endfor %}
+	{% else %}
+		<span class="lead">Correction undisponible for this quiz.</span>
+	{% endif %}
+
+{% endblock %}

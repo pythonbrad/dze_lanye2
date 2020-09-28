@@ -17,7 +17,7 @@
     <button type="submit" class="btn btn-primary">Next →</button>
   </form>
   {% if question.can_see_explanation %}
-    <div id="help_block" class="card-body" hidden>
+    <div id="help_block" class="card card-body" hidden>
       <b class='badge badge-info'>TIPS</b>
       {{ question.explanation|escape|markdown|safe }}
     </div>

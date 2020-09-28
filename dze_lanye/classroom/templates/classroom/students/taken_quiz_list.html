@@ -12,6 +12,7 @@
           <th>Quiz</th>
           <th>Subject</th>
           <th>Score</th>
+          <th>Correction</th>
         </tr>
       </thead>
       <tbody>
@@ -20,6 +21,11 @@
             <td>{{ taken_quiz.quiz.name }}</td>
             <td>{{ taken_quiz.quiz.subject.get_html_badge }}</td>
             <td>{{ taken_quiz.score }}</td>
+            <td>
+              {% if taken_quiz.quiz.can_see_correction %}
+                <a href="{% url 'students:quiz_correction' taken_quiz.pk %}"><span class='badge badge-help'>See correction</span></a>
+              {% endif %}
+            </td>
           </tr>
         {% empty %}
           <tr>

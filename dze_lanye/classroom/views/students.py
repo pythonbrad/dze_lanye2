@@ -6,7 +6,7 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
 from ..decorators import student_required
 from ..forms import StudentInterestsForm, StudentSignUpForm, TakeQuizForm
@@ -125,3 +125,9 @@ def clear_taken(request):
     student.quiz_answers.all().delete()
     messages.success(request, 'Taken quiz, cleared!')
     return redirect('students:taken_quiz_list')
+
+@method_decorator([login_required, student_required], name='dispatch')
+class QuizCorrectionDetailView(DetailView):
+    model = TakenQuiz
+    context_object_name = 'taken_quiz'
+    template_name = 'classroom/students/quiz_correction.html'
