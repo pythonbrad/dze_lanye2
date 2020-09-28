@@ -2,6 +2,9 @@
 
 {% block content %}
   {% include 'classroom/students/_header.html' with active='taken' %}
+  {% if taken_quizzes %}
+    <a href="{% url 'students:clear_taken' %}"><span class='badge badge-danger'>Clear taken</span></a>
+  {% endif %}
   <div class="card">
     <table class="table mb-0">
       <thead>

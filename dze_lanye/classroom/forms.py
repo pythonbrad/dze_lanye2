@@ -51,7 +51,10 @@ class StudentInterestsForm(forms.ModelForm):
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ('text', )
+        fields = ('text', 'explanation', 'can_see_explanation')
+        widgets = {
+            'explanation': forms.Textarea
+        }
 
 
 class BaseAnswerInlineFormSet(forms.BaseInlineFormSet):

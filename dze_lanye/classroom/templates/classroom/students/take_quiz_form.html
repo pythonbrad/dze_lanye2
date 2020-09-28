@@ -2,6 +2,8 @@
 
 {% load crispy_forms_tags %}
 
+{% load markdown_extras %}
+
 {% block content %}
   <div class="progress mb-3">
     <div class="progress-bar" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%"></div>
@@ -11,6 +13,22 @@
   <form method="post" novalidate>
     {% csrf_token %}
     {{ form|crispy }}
+    <button type='button' class="btn btn-info" onclick="show_help()" id='help_button' hidden>Tips</button>
     <button type="submit" class="btn btn-primary">Next →</button>
   </form>
+  {% if question.can_see_explanation %}
+    <div id="help_block" class="card-body" hidden>
+      <b class='badge badge-info'>TIPS</b>
+      {{ question.explanation|escape|markdown|safe }}
+    </div>
+    <script type="text/javascript">
+      $help_button = document.getElementById('help_button');
+      $help_button.hidden = false;
+      function show_help() {
+        $help_block = document.getElementById('help_block');
+        $help_block.hidden = false;
+        $help_button.hidden = true;
+      }
+    </script>
+  {% endif %}
 {% endblock %}

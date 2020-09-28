@@ -34,6 +34,8 @@ class Quiz(models.Model):
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
     text = models.CharField('Question', max_length=255)
+    explanation = models.CharField('Explanation', max_length=2048, blank=True, default='', help_text='You can use the markdown language.')
+    can_see_explanation = models.BooleanField('Can the student see the explanation?', default=False)
 
     def __str__(self):
         return self.text

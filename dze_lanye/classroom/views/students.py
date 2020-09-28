@@ -116,3 +116,12 @@ def take_quiz(request, pk):
         'form': form,
         'progress': progress
     })
+
+@login_required
+@student_required
+def clear_taken(request):
+    student = request.user.student
+    student.taken_quizzes.all().delete()
+    student.quiz_answers.all().delete()
+    messages.success(request, 'Taken quiz, cleared!')
+    return redirect('students:taken_quiz_list')
