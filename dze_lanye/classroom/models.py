@@ -27,6 +27,7 @@ class Quiz(models.Model):
     name = models.CharField(max_length=255)
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='quizzes')
     can_see_correction = models.BooleanField('Can the students see the correction?', default=True)
+    can_redo = models.BooleanField('Can the students redo the quiz?', default=False)
 
     def __str__(self):
         return self.name
@@ -34,7 +35,7 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
-    text = models.CharField('Question', max_length=255)
+    text = models.CharField('Question', max_length=2048, help_text='You can use the markdown language.')
     explanation = models.CharField('Explanation', max_length=2048, blank=True, default='', help_text='You can use the markdown language.')
     can_see_explanation = models.BooleanField('Can the students see the explanation?', default=False)
 

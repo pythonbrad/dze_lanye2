@@ -53,7 +53,8 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = ('text', 'explanation', 'can_see_explanation')
         widgets = {
-            'explanation': forms.Textarea
+            'text': forms.Textarea,
+            'explanation': forms.Textarea,
         }
 
 

@@ -2,9 +2,6 @@
 
 {% block content %}
   {% include 'classroom/students/_header.html' with active='taken' %}
-  {% if taken_quizzes %}
-    <a href="{% url 'students:clear_taken' %}"><span class='badge badge-danger'>Clear taken</span></a>
-  {% endif %}
   <div class="card">
     <table class="table mb-0">
       <thead>
@@ -12,7 +9,7 @@
           <th>Quiz</th>
           <th>Subject</th>
           <th>Score</th>
-          <th>Correction</th>
+          <th>Option</th>
         </tr>
       </thead>
       <tbody>
@@ -22,6 +19,9 @@
             <td>{{ taken_quiz.quiz.subject.get_html_badge }}</td>
             <td>{{ taken_quiz.score }}</td>
             <td>
+              {% if taken_quiz.quiz.can_redo %}
+                <a href="{% url 'students:taken_quiz_clear' taken_quiz.pk %}"><span class='badge badge-danger'>Reset</span></a>
+              {% endif %}
               {% if taken_quiz.quiz.can_see_correction %}
                 <a href="{% url 'students:quiz_correction' taken_quiz.pk %}"><span class='badge badge-help'>See correction</span></a>
               {% endif %}

@@ -119,11 +119,15 @@ def take_quiz(request, pk):
 
 @login_required
 @student_required
-def clear_taken(request):
+def taken_quiz_clear(request, pk):
     student = request.user.student
-    student.taken_quizzes.all().delete()
-    student.quiz_answers.all().delete()
-    messages.success(request, 'Taken quiz, cleared!')
+    taken_quiz = get_object_or_404(TakenQuiz, pk=pk)
+    if taken_quiz.quiz.can_redo:
+        student.quiz_answers.filter(answer__question__quiz=taken_quiz.quiz).delete()
+        taken_quiz.delete()
+        messages.success(request, 'Taken quiz, cleared!')
+    else:
+        messages.warning(request, 'This taken quiz, can not be cleared!')
     return redirect('students:taken_quiz_list')
 
 @method_decorator([login_required, student_required], name='dispatch')
