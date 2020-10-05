@@ -2,8 +2,6 @@
 
 {% load crispy_forms_tags %}
 
-{% load markdown_extras %}
-
 {% block content %}
 	<h2 class="mb-3">{{ taken_quiz.quiz.name }} (Correction)</h2>
 	{% if taken_quiz.quiz.can_see_correction %}
@@ -18,7 +16,7 @@
 		  	{% endfor %}
 		  	{% if question.explanation|length %}
 		  		<p class="card-title badge badge-info">Explanation</p>
-		  		<div class="card card-body">{{ question.explanation|escape|markdown|safe }}</div>
+		  		<div class="card card-body">{{ question.explanation }}</div>
 		  	{% endif %}
 		{% endfor %}
 	{% else %}
