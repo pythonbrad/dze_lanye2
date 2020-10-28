@@ -6,10 +6,10 @@
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{% url 'teachers:quiz_change_list' %}">My Quizzes</a></li>
-      <li class="breadcrumb-item active" aria-current="page">{{ quiz.name }}</li>
+      <li class="breadcrumb-item active {% if quiz.use_katex %}use_katex{% endif %}" aria-current="page">{{ quiz.name }}</li>
     </ol>
   </nav>
-  <h2 class="mb-3">
+  <h2 class="mb-3 {% if quiz.use_katex %}use_katex{% endif %}">
     {{ quiz.name }}
     <a href="{% url 'teachers:quiz_results' quiz.pk %}" class="btn btn-primary float-right">View results</a>
   </h2>
@@ -40,7 +40,7 @@
         <div class="list-group-item">
           <div class="row">
             <div class="col-10">
-              <a href="{% url 'teachers:question_change' quiz.pk question.pk %}">{{ question.text }}</a>
+              <a href="{% url 'teachers:question_change' quiz.pk question.pk %}" class="{% if quiz.use_katex %}use_katex{% endif %}">{{ question.text }}</a>
             </div>
             <div class="col-2">
               {{ question.answers_count }}

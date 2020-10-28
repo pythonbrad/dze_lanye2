@@ -28,6 +28,7 @@ class Quiz(models.Model):
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, related_name='quizzes')
     can_see_correction = models.BooleanField('Can the students see the correction?', default=True)
     can_redo = models.BooleanField('Can the students redo the quiz?', default=False)
+    use_katex = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

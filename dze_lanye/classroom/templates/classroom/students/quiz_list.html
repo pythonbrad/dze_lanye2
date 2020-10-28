@@ -15,7 +15,7 @@
       <tbody>
         {% for quiz in quizzes %}
           <tr>
-            <td class="align-middle">{{ quiz.name }}</td>
+            <td class="align-middle {% if quiz.use_katex %}use_katex{% endif %}">{{ quiz.name }}</td>
             <td class="align-middle">{{ quiz.subject.get_html_badge }}</td>
             <td class="align-middle">{{ quiz.questions_count }} questions</td>
             <td class="text-right">

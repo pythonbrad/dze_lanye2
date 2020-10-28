@@ -3,20 +3,20 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-	<h2 class="mb-3">{{ taken_quiz.quiz.name }} (Correction)</h2>
+	<h2 class="mb-3 {% if taken_quiz.quiz.use_katex %}use_katex{% endif %}">{{ taken_quiz.quiz.name }} (Correction)</h2>
 	{% if taken_quiz.quiz.can_see_correction %}
 		{% for question in taken_quiz.quiz.questions.all %}
 			<br/>
-			<p class="lead">Question: {{ question.text }}</p>
+			<p class="lead {% if taken_quiz.quiz.use_katex %}use_katex{% endif %}">Question: {{ question.text }}</p>
 			<p>Answers:</p>
 			{% for answer in question.answers.all %}
 				{% if answer.is_correct %}
-					<ol>{{ answer.text }}</ol>
+					<ol class="{% if taken_quiz.quiz.use_katex %}use_katex{% endif %}">{{ answer.text }}</ol>
 		  		{% endif %}
 		  	{% endfor %}
 		  	{% if question.explanation|length %}
 		  		<p class="card-title badge badge-info">Explanation</p>
-		  		<div class="card card-body">{{ question.explanation }}</div>
+		  		<div class="card card-body {% if taken_quiz.quiz.use_katex %}use_katex{% endif %}">{{ question.explanation }}</div>
 		  	{% endif %}
 		{% endfor %}
 	{% else %}
